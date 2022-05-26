@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid d-md-flex justify-content-md-end">
+      <a href="{% url 'cart_home' %}" class="btn btn-outline-primary">View cart</a>
+    </div>
+    <div class="container" style="display:flex;flex-flow:row wrap;justify-content:space-between;">
+          {% for car in object_list %}
+          <div class="card border-primary mb-3" style="width:20rem;height:25rem;">
+            <img src="{{ car.get_first_img_url }}" class="card-img-top" style="flex-grow:1;height:10rem;">
+            <div class="card-body">
+              <h3 class="card-title">{{ car.name }}</h3>
+              <p class="card-text">{{ car.description }}</p>
+              <a href="{% url 'add_to_cart' car.id %}" class="btn btn-primary">Add to Cart</a>
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+{% endblock content%}
+{% block js %}
+    <script src="{% static 'car_trader_app/home.js' %}"></script>
+{% endblock js %}

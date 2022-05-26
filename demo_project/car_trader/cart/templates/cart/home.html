@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Cart
+{% endblock title %}
+
+{% block content %}
+  <p>Cart</p>
+  {% for cart in object_list %}
+    <div class="">
+      <div class="">
+        <div class="name">
+          <p>ID: {{cart.user_id}}</p>
+          <p>{</p>
+            {% for car in cart.cars.all %}
+              <div>
+                <p>&emsp;Name: <a href="#">{{car.name}}</a> <a href="{% url 'remove_from_cart' car.pk %}"><button>Remove</button></a></p>
+              </div>
+            {% endfor %}
+          <p>}</p>
+          <a href="{% url 'car_home' %}"><button>Continue shopping</button></a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock content%}
